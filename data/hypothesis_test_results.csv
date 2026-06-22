@@ -1,0 +1,15 @@
+Metric,Value
+Ad Conversion Rate %,2.5547
+PSA Conversion Rate %,1.7854
+Absolute Uplift (pp),0.7692
+Relative Uplift %,43.09
+Chi-Square Statistic,54.0058
+Chi-Square P-Value,0.0
+Z-Statistic,7.3701
+Z-Test P-Value,0.0
+CI Lower 95%,0.5951
+CI Upper 95%,0.9434
+Cohen's h,0.053
+Effect Size,Small
+Statistically Significant,YES
+Recommendation,Deploy ad campaign
