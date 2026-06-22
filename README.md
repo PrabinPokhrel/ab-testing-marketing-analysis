@@ -1,7 +1,7 @@
 # Marketing Campaign A/B Testing and Conversion Analysis
 
 Statistical analysis of a real-world marketing A/B test using Python,
-hypothesis testing, and Power BI — with an auto-generated Excel business report.
+hypothesis testing, and Power BI - with an auto-generated Excel business report.
 
 ## Business Problem
 
@@ -37,18 +37,18 @@ significantly higher rate than the PSA control. The 95% confidence
 interval lies entirely above zero, confirming the ad's positive impact
 across all plausible scenarios.
 
-While Cohen's h = 0.053 indicates a small practical effect — common
-with very large samples — the 43% relative uplift translates to
+While Cohen's h = 0.053 indicates a small practical effect - common
+with very large samples - the 43% relative uplift translates to
 approximately 385 additional conversions per 50,000 monthly users.
 Monday and Tuesday show the highest conversion uplift and should be
 prioritised for ad delivery.
 
 ## Key Findings
 
-- Ad group converts at 2.55% vs PSA at 1.79% — a 43% relative uplift
+- Ad group converts at 2.55% vs PSA at 1.79% - a 43% relative uplift
 - Both Chi-square (54.0) and Z-test (7.37) confirm statistical significance
 - Effect is statistically large but practically small (Cohen's h = 0.053)
-  — a nuance that distinguishes rigorous analysis from surface-level reporting
+  - a nuance that distinguishes rigorous analysis from surface-level reporting
 - Monday has the highest conversion for both groups (Ad: 3.31%, PSA: 2.26%)
 - Conversion peaks between 4pm and 5pm for both groups
 - PSA group has near-zero conversions between midnight and 6am due to
@@ -87,7 +87,7 @@ ab-testing-marketing-analysis/
 
 ## Dataset
 
-Marketing A/B Testing Dataset — publicly available on Kaggle:
+Marketing A/B Testing Dataset - publicly available on Kaggle:
 https://www.kaggle.com/datasets/faviovaz/marketing-ab-testing
 
 588,101 users split into ad and PSA groups with conversion tracking.
