@@ -1,81 +1,102 @@
-# E-commerce Revenue Forecasting and Anomaly Detection
+# Marketing Campaign A/B Testing and Conversion Analysis
 
-End-to-end revenue forecasting and anomaly detection pipeline built on
-the UCI Online Retail II dataset (1M+ transactions, UK e-commerce, 2009-2011).
+Statistical analysis of a real-world marketing A/B test using Python,
+hypothesis testing, and Power BI — with an auto-generated Excel business report.
 
 ## Business Problem
 
-An e-commerce company needs to predict next 30 days of revenue and get
-automatically alerted when daily sales deviate significantly from expected
-patterns — without manual intervention.
+A marketing team ran two campaign variants:
+- **Ad group (Test):** Users shown a paid advertisement
+- **PSA group (Control):** Users shown a public service announcement
 
-## Results
+The goal is to determine whether the ad campaign significantly improves
+conversion rate and whether it is worth deploying at scale.
+
+## Key Results
 
 | Metric | Value |
 |--------|-------|
-| Total transactions analysed | 805,549 |
-| Daily revenue data points | 604 days |
-| Average daily revenue | £29,376 |
-| Peak daily revenue | £184,367 (Dec 2011 Christmas peak) |
-| Prophet forecast MAPE | 39.51% |
-| ARIMA baseline MAPE | 31.79% |
-| Anomalies detected | 31 days (5.1%) |
-| Revenue spikes flagged | 20 days |
-| Revenue dips flagged | 11 days |
+| Total users | 588,101 |
+| Ad group users | 564,577 |
+| PSA group users | 23,524 |
+| Ad conversion rate | 2.5547% |
+| PSA conversion rate | 1.7854% |
+| Absolute uplift | +0.7692 percentage points |
+| Relative uplift | +43.09% |
+| Z-statistic | 7.37 |
+| P-value | < 0.0001 |
+| 95% Confidence Interval | [0.5951%, 0.9434%] |
+| Cohen's h | 0.0530 (Small effect) |
+| Statistically significant | YES |
+
+## Recommendation
+
+**Deploy the ad campaign.** The test provides overwhelming statistical
+evidence (p < 0.0001, Z = 7.37) that the ad group converts at a
+significantly higher rate than the PSA control. The 95% confidence
+interval lies entirely above zero, confirming the ad's positive impact
+across all plausible scenarios.
+
+While Cohen's h = 0.053 indicates a small practical effect — common
+with very large samples — the 43% relative uplift translates to
+approximately 385 additional conversions per 50,000 monthly users.
+Monday and Tuesday show the highest conversion uplift and should be
+prioritised for ad delivery.
 
 ## Key Findings
 
-- ARIMA outperformed Prophet on this dataset due to the truncated
-  Christmas peak test window — an honest and realistic analytical outcome
-- Average spike revenue (£83,655) is 3x normal daily revenue (£27,720)
-- The lowest dip (£4,886 on 22 Dec 2010) reflects a Christmas Eve
-  half-day trading pattern
-- Sunday trading is consistently zero throughout — confirmed retail closure
+- Ad group converts at 2.55% vs PSA at 1.79% — a 43% relative uplift
+- Both Chi-square (54.0) and Z-test (7.37) confirm statistical significance
+- Effect is statistically large but practically small (Cohen's h = 0.053)
+  — a nuance that distinguishes rigorous analysis from surface-level reporting
+- Monday has the highest conversion for both groups (Ad: 3.31%, PSA: 2.26%)
+- Conversion peaks between 4pm and 5pm for both groups
+- PSA group has near-zero conversions between midnight and 6am due to
+  small sample size at those hours
 
 ## Tech Stack
 
-- Python: Pandas, NumPy, Prophet, Statsmodels, Scikit-learn
-- Visualisation: Matplotlib, Seaborn, Plotly
-- Database: SQL Server
-- BI: Power BI
-- Automation: GitHub Actions (daily scheduler)
+- Python: Pandas, NumPy, SciPy, Statsmodels, Matplotlib, Seaborn, OpenPyXL
+- Statistical methods: Chi-square test, Two-proportion Z-test, Cohen's h,
+  Power analysis, Confidence intervals
+- Reporting: Auto-generated Excel report with 3 formatted sheets
+- Visualisation: Power BI dashboard
 
 ## Project Structure
+ab-testing-marketing-analysis/
 
-ecommerce-revenue-forecasting/
-
-├── data/                        # CSV outputs (raw Excel excluded via .gitignore)
+├── data/                          # Output charts and CSV results
 
 ├── notebooks/
 
-│   ├── 01_eda.ipynb             # Data cleaning and exploratory analysis
+│   ├── 01_eda.ipynb               # Exploratory data analysis
 
-│   ├── 02_forecasting.ipynb     # Prophet and ARIMA forecasting
+│   ├── 02_hypothesis_testing.ipynb # Statistical tests and effect size
 
-│   └── 03_anomaly.ipynb         # Isolation Forest anomaly detection
+│   └── 03_excel_report.ipynb      # Auto-generated Excel report
 
-├── src/
+├── outputs/
 
-│   └── pipeline.py              # Automated daily pipeline
+│   └── ab_test_report.xlsx        # Final Excel business report
 
 ├── dashboard/
 
-│   └── revenue_forecast.pbix    # Power BI dashboard
+│   └── ab_test_dashboard.pbix     # Power BI dashboard
 
-└── .github/
-
-└── workflows/
-
-└── daily_run.yml        # GitHub Actions scheduler
+└── requirements.txt
 
 ## Dataset
 
-UCI Online Retail II Dataset — publicly available at:
-https://archive.ics.uci.edu/dataset/502/online+retail+ii
+Marketing A/B Testing Dataset — publicly available on Kaggle:
+https://www.kaggle.com/datasets/faviovaz/marketing-ab-testing
+
+588,101 users split into ad and PSA groups with conversion tracking.
 
 ## How to Run
 
 ```bash
 pip install -r requirements.txt
-python src/pipeline.py
+jupyter notebook
 ```
+
+Run notebooks in order: 01 → 02 → 03
